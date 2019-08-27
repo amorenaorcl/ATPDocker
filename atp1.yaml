@@ -1,20 +1,20 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: atp2
+  name: atp1
 spec:
   selector:
     matchLabels:
-      app: atp2
+      app: atp1
   replicas: 1 # deployment runs 1 pods matching the template
   template: # create pods using pod definition in this template
     metadata:
       labels:
-        app: atp2
+        app: atp1
     spec:
       containers:
-      - name: atp2
-        image: fra.ocir.io/<your_tenancy>/<repo_path>/atp2:latest
+      - name: atp1
+        image: fra.ocir.io/<your_tenancy>/<repo_path>/atp1:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3050 #Endpoint is at port 80 in the container
@@ -24,7 +24,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: atp2
+  name: atp1
 spec:
   type: NodePort #Exposes the service as a node port
   ports:
@@ -32,4 +32,4 @@ spec:
     protocol: TCP
     targetPort: 3050
   selector:
-    app: atp2
+    app: atp1
